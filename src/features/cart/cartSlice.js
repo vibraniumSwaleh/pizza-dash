@@ -46,6 +46,8 @@ const cartSlice = createSlice({
   },
 });
 
+console.log(initialState);
+
 export const {
   addItem,
   deleteItem,
