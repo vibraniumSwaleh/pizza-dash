@@ -7,8 +7,16 @@ function MenuItem({ pizza }) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
   const dispatch = useDispatch();
 
-  function handleAddCartItem() {
-    dispatch(addItem(pizza));
+  function handleAddToCart() {
+    const newItem = {
+      pizzaId: id,
+      name,
+      quantity: 1,
+      unitPrice,
+      totalPrice: unitPrice,
+    };
+
+    dispatch(addItem(newItem));
   }
 
   return (
@@ -33,7 +41,7 @@ function MenuItem({ pizza }) {
           )}
 
           {!soldOut && (
-            <Button type="small" onClick={handleAddCartItem}>
+            <Button type="small" onClick={handleAddToCart}>
               Add to cart
             </Button>
           )}
