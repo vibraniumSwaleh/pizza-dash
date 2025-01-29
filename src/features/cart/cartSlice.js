@@ -26,10 +26,12 @@ const cartSlice = createSlice({
     },
     decreaseItemQuantity(state, action) {
       state.cart.forEach((order) => {
-        if (order.pizzaId === action.payload && order.quantity > 0) {
+        if (order.pizzaId === action.payload) {
           order.quantity--;
           order.totalPrice = order.unitPrice * order.quantity;
         }
+        if (order.quantity === 0)
+          cartSlice.caseReducers.deleteItem(state, action);
       });
     },
     clearCart(state) {
