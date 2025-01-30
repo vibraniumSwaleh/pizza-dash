@@ -1,5 +1,6 @@
 // Test ID: IIDSAT
-import { useLoaderData } from 'react-router-dom';
+import { useFetcher, useLoaderData } from 'react-router-dom';
+import { useEffect } from 'react';
 import { getOrder } from '../../services/apiRestaurant';
 import OrderItem from './OrderItem';
 
@@ -8,8 +9,10 @@ import {
   formatCurrency,
   formatDate,
 } from '../../utils/helpers';
+import UpdateOrder from './UpdateOrder';
 
 function Order() {
+  const fetcher = useFetcher();
   const order = useLoaderData();
   const {
     id,
@@ -21,6 +24,13 @@ function Order() {
     cart,
   } = order;
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
+
+  useEffect(
+    function () {
+      if (!fetcher.data && fetcher.state === 'idle') fetcher.load('/menu');
+    },
+    [fetcher.state],
+  );
 
   return (
     <div className="space-y-8 px-4 py-6">
@@ -52,7 +62,16 @@ function Order() {
 
       <ul className="dive-stone-200 divide-y border-b border-t">
         {cart.map((item) => (
-          <OrderItem key={item.name} item={item} />
+          <OrderItem
+            key={item.name}
+            item={item}
+            const
+            isLoadingIngredients={fetcher.state === 'loading'}
+            ingredients={
+              fetcher.data?.find((el) => el.id === item.pizzaId)?.ingredients ??
+              []
+            }
+          />
         ))}
       </ul>
 
@@ -69,6 +88,8 @@ function Order() {
           To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}
         </p>
       </div>
+
+      <UpdateOrder order={order} />
     </div>
   );
 }
