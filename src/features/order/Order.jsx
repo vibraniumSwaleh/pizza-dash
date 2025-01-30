@@ -89,7 +89,7 @@ function Order() {
         </p>
       </div>
 
-      <UpdateOrder order={order} />
+      {!priority && <UpdateOrder order={order} />}
     </div>
   );
 }
