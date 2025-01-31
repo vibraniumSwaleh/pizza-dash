@@ -1,6 +1,7 @@
 # 🍕 Pizza Dash
 
 Pizza Dash is a **React-based** web application designed to streamline pizza ordering and management. Built with **Vite**, **React Router**, **Redux Toolkit**, and **TailwindCSS**, this project offers a fast and modern frontend experience.
+
 ![Homepage](public/home.png)
 
 ---
@@ -8,8 +9,17 @@ Pizza Dash is a **React-based** web application designed to streamline pizza ord
 ## 🚀 Features
 
 - 🍕 **Order Management** - Easily place and track orders.
+
   ![Order page](public/new_order.png)
-  ![Cart](public/cart.png)
+
+---
+
+![Cart](public/cart.png)
+
+---
+
+![Placed Order](public/order.png)
+
 - 📜 **Dynamic UI** - Styled using TailwindCSS.
 - 🔄 **State Management** - Powered by Redux Toolkit.
 - 🌍 **Routing** - Integrated with React Router.
